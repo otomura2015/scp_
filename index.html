@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SCP Foundation — Arquivo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #e8e8e8;
+            color: #242424;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        /* =====================================================
+           TOPO
+        ===================================================== */
+
+        .topbar {
+            height: 72px;
+            background: #242424;
+            color: #fff;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 35px;
+
+            border-bottom: 4px solid #b5b5b5;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-area img {
+            width: 48px;
+            height: 48px;
+
+            object-fit: contain;
+
+            background: #ddd;
+            border: 1px solid #aaa;
+        }
+
+        .logo-text {
+            line-height: 1.1;
+        }
+
+        .logo-title {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo-subtitle {
+            font-size: 11px;
+            color: #bbb;
+            letter-spacing: 2px;
+        }
+
+        .top-status {
+            margin-left: auto;
+
+            font-size: 12px;
+            color: #bbb;
+
+            text-align: right;
+        }
+
+        .top-status strong {
+            color: #ddd;
+        }
+
+        /* =====================================================
+           LAYOUT
+        ===================================================== */
+
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 72px);
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            width: 245px;
+
+            background: #d3d3d3;
+
+            border-right: 1px solid #aaa;
+
+            padding: 25px 18px;
+        }
+
+        .sidebar-title {
+            font-size: 11px;
+            color: #666;
+
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+
+            margin: 0 0 10px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .nav-button {
+            width: 100%;
+
+            border: 0;
+            border-bottom: 1px solid #bbb;
+
+            background: transparent;
+
+            padding: 11px 10px;
+
+            text-align: left;
+
+            color: #333;
+
+            cursor: pointer;
+
+            font-size: 13px;
+        }
+
+        .nav-button:hover {
+            background: #c4c4c4;
+        }
+
+        .nav-button.active {
+            background: #bdbdbd;
+            font-weight: bold;
+
+            border-left: 4px solid #555;
+        }
+
+        .classification {
+            border-top: 1px solid #aaa;
+            padding-top: 15px;
+        }
+
+        .class-line {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 6px 8px;
+
+            font-size: 12px;
+
+            border-bottom: 1px solid #bbb;
+        }
+
+        .class-dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #777;
+
+            margin-top: 3px;
+        }
+
+        /* =====================================================
+           CONTEÚDO
+        ===================================================== */
+
+        .content {
+            flex: 1;
+
+            max-width: 1250px;
+
+            padding: 35px 45px;
+
+            margin: 0 auto;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* =====================================================
+           TÍTULOS
+        ===================================================== */
+
+        .page-header {
+            border-bottom: 1px solid #999;
+
+            margin-bottom: 25px;
+
+            padding-bottom: 15px;
+        }
+
+        .page-header h1 {
+            margin: 0 0 5px;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 31px;
+
+            font-weight: normal;
+        }
+
+        .page-header p {
+            margin: 0;
+
+            color: #666;
+
+            font-size: 13px;
+        }
+
+        .breadcrumb {
+            color: #777;
+
+            font-size: 11px;
+
+            margin-bottom: 8px;
+        }
+
+        /* =====================================================
+           AVISO
+        ===================================================== */
+
+        .notice {
+            background: #dcdcdc;
+
+            border: 1px solid #aaa;
+
+            border-left: 5px solid #555;
+
+            padding: 14px 16px;
+
+            margin-bottom: 25px;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           INÍCIO
+        ===================================================== */
+
+        .intro {
+            background: #f3f3f3;
+
+            border: 1px solid #c4c4c4;
+
+            padding: 25px;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+        .intro h2 {
+            margin-top: 0;
+
+            font-family: Georgia, serif;
+
+            font-weight: normal;
+        }
+
+        .quick-links {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+        .quick-link {
+            background: #ddd;
+
+            border: 1px solid #aaa;
+
+            padding: 18px;
+
+            cursor: pointer;
+        }
+
+        .quick-link:hover {
+            background: #d0d0d0;
+        }
+
+        .quick-link strong {
+            display: block;
+
+            margin-bottom: 5px;
+
+            font-size: 14px;
+        }
+
+        .quick-link span {
+            font-size: 12px;
+
+            color: #666;
+        }
+
+        /* =====================================================
+           PESQUISA
+        ===================================================== */
+
+        .search-box {
+            display: flex;
+
+            margin-bottom: 25px;
+        }
+
+        .search-box input {
+            flex: 1;
+
+            border: 1px solid #aaa;
+
+            background: #f5f5f5;
+
+            padding: 13px;
+
+            outline: none;
+
+            font-size: 13px;
+        }
+
+        .search-box input:focus {
+            border-color: #666;
+        }
+
+        .filters {
+            display: flex;
+
+            gap: 7px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 20px;
+        }
+
+        .filter {
+            border: 1px solid #aaa;
+
+            background: #ddd;
+
+            padding: 7px 12px;
+
+            cursor: pointer;
+
+            font-size: 11px;
+        }
+
+        .filter:hover,
+        .filter.active {
+            background: #555;
+
+            color: white;
+
+            border-color: #555;
+        }
+
+        /* =====================================================
+           LISTA SCP
+        ===================================================== */
+
+        .scp-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .scp-row {
+            display: grid;
+
+            grid-template-columns: 145px 1fr 100px;
+
+            align-items: center;
+
+            background: #f2f2f2;
+
+            border: 1px solid #c2c2c2;
+
+            min-height: 70px;
+
+            cursor: pointer;
+
+            transition: background .15s;
+        }
+
+        .scp-row:hover {
+            background: #dedede;
+        }
+
+        .scp-number {
+            padding: 15px;
+
+            font-weight: bold;
+
+            color: #333;
+        }
+
+        .scp-info {
+            padding: 15px;
+
+            border-left: 1px solid #ccc;
+        }
+
+        .scp-name {
+            font-weight: bold;
+
+            font-size: 14px;
+
+            margin-bottom: 5px;
+        }
+
+        .scp-description {
+            color: #777;
+
+            font-size: 12px;
+        }
+
+        .scp-class {
+            text-align: center;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            color: #555;
+        }
+
+        /* =====================================================
+           DOCUMENTO SCP
+        ===================================================== */
+
+        .document {
+            background: #f7f7f7;
+
+            border: 1px solid #aaa;
+
+            padding: 35px 40px;
+
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+        }
+
+        .document-title {
+            text-align: center;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            margin-bottom: 25px;
+        }
+
+        .document-title h1 {
+            margin: 0;
+
+            font-size: 27px;
+
+            font-weight: normal;
+        }
+
+        .document-title p {
+            color: #777;
+
+            font-size: 12px;
+        }
+
+        .metadata {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-bottom: 30px;
+
+            font-size: 13px;
+        }
+
+        .metadata td {
+            border: 1px solid #aaa;
+
+            padding: 10px;
+        }
+
+        .metadata td:first-child {
+            width: 190px;
+
+            background: #ddd;
+
+            font-weight: bold;
+        }
+
+        .document h2 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 20px;
+
+            font-weight: normal;
+
+            border-bottom: 1px solid #aaa;
+
+            padding-bottom: 7px;
+
+            margin-top: 28px;
+        }
+
+        .document p {
+            font-size: 14px;
+
+            line-height: 1.75;
+
+            color: #333;
+        }
+
+        .back-button {
+            margin-bottom: 18px;
+
+            border: 1px solid #999;
+
+            background: #ddd;
+
+            padding: 8px 14px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+        }
+
+        .back-button:hover {
+            background: #ccc;
+        }
+
+        /* =====================================================
+           VÍDEO DO SCP-173
+        ===================================================== */
+
+        .video-container {
+            position: relative;
+
+            width: 100%;
+
+            max-width: 900px;
+
+            aspect-ratio: 16 / 9;
+
+            margin: 20px auto 30px;
+
+            background: #222;
+
+            border: 1px solid #999;
+
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            left: 0;
+            top: 0;
+
+            border: 0;
+        }
+
+        /* =====================================================
+           HISTÓRIA
+        ===================================================== */
+
+        .timeline {
+            border-left: 2px solid #999;
+
+            margin-left: 15px;
+
+            padding-left: 25px;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+
+            position: absolute;
+
+            left: -32px;
+            top: 5px;
+
+            width: 10px;
+            height: 10px;
+
+            background: #666;
+
+            border-radius: 50%;
+        }
+
+        .timeline-year {
+            font-weight: bold;
+
+            font-size: 13px;
+
+            color: #555;
+        }
+
+        .timeline-item h3 {
+            margin: 5px 0;
+
+            font-family: Georgia, serif;
+
+            font-weight: normal;
+        }
+
+        .timeline-item p {
+            font-size: 13px;
+
+            color: #555;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           RODAPÉ
+        ===================================================== */
+
+        footer {
+            margin-top: 45px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #aaa;
+
+            color: #777;
+
+            font-size: 10px;
+
+            text-align: center;
+        }
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 190px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+
+            .scp-row {
+                grid-template-columns: 100px 1fr 70px;
+            }
+
+            .document {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+
+                border-right: 0;
+
+                border-bottom: 1px solid #aaa;
+            }
+
+            .sidebar-section {
+                margin-bottom: 10px;
+            }
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .top-status {
+                display: none;
+            }
+
+            .content {
+                padding: 20px 12px;
+            }
+
+            .scp-row {
+                grid-template-columns: 1fr;
+            }
+
+            .scp-info {
+                border-left: 0;
+
+                border-top: 1px solid #ccc;
+            }
+
+            .scp-class {
+                padding: 10px;
+
+                text-align: left;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         TOPO
+    ====================================================== -->
+
+    <header class="topbar">
+
+        <div class="logo-area">
+
+            <!-- COLOQUE SEU LOGO COMO "scp-logo.png" -->
+            <img src="scp-logo.png" alt="SCP">
+
+            <div class="logo-text">
+
+                <div class="logo-title">
+                    SCP FOUNDATION
+                </div>
+
+                <div class="logo-subtitle">
+                    SECURE · CONTAIN · PROTECT
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="top-status">
+
+            ARQUIVO CENTRAL<br>
+
+            <strong>DATABASE ONLINE</strong>
+
+        </div>
+
+    </header>
+
+
+    <div class="layout">
+
+
+        <!-- =================================================
+             MENU LATERAL
+        ================================================== -->
+
+        <aside class="sidebar">
+
+
+            <div class="sidebar-section">
+
+                <div class="sidebar-title">
+                    Navegação
+                </div>
+
+
+                <button
+                    class="nav-button active"
+                    onclick="showPage('home', this)">
+
+                    Página inicial
+
+                </button>
+
+
+                <button
+                    class="nav-button"
+                    onclick="showPage('database', this)">
+
+                    Banco de dados
+
+                </button>
+
+
+                <button
+                    class="nav-button"
+                    onclick="showPage('history', this)">
+
+                    História
+
+                </button>
+
+            </div>
+
+
+            <div class="sidebar-section">
+
+                <div class="sidebar-title">
+                    Classes
+                </div>
+
+
+                <div class="classification">
+
+                    <div class="class-line">
+                        <span>Safe</span>
+                        <span class="class-dot"></span>
+                    </div>
+
+
+                    <div class="class-line">
+                        <span>Euclid</span>
+                        <span class="class-dot"></span>
+                    </div>
+
+
+                    <div class="class-line">
+                        <span>Keter</span>
+                        <span class="class-dot"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="sidebar-section">
+
+                <div class="sidebar-title">
+                    Arquivo
+                </div>
+
+
+                <div style="
+                    font-size:11px;
+                    color:#666;
+                    line-height:1.6;
+                    padding:8px;
+                ">
+
+                    Sistema de consulta documental.
+
+                    <br><br>
+
+                    Conteúdo organizado por número
+                    de item, classe e registro histórico.
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             CONTEÚDO PRINCIPAL
+        ================================================== -->
+
+        <main class="content">
+
+
+            <!-- =================================================
+                 PÁGINA INICIAL
+            ================================================== -->
+
+            <section id="home" class="page active">
+
+
+                <div class="page-header">
+
+                    <div class="breadcrumb">
+                        ARQUIVO / INÍCIO
+                    </div>
+
+
+                    <h1>
+                        Fundação SCP
+                    </h1>
+
+
+                    <p>
+                        Banco de dados documental
+                    </p>
+
+                </div>
+
+
+                <div class="notice">
+
+                    <strong>NOTA DO ARQUIVO:</strong>
+
+                    Este sistema contém registros classificados
+                    referentes a objetos, entidades e fenômenos
+                    anômalos catalogados pela Fundação.
+
+                </div>
+
+
+                <div class="intro">
+
+                    <h2>
+                        Sobre este arquivo
+                    </h2>
+
+
+                    <p>
+                        A Fundação SCP é uma organização fictícia
+                        dedicada à identificação, contenção e estudo
+                        de fenômenos que não podem ser explicados
+                        pelos meios convencionais.
+                    </p>
+
+
+                    <p>
+                        Os registros abaixo apresentam versões
+                        resumidas dos principais itens catalogados.
+                        Consulte o banco de dados para acessar os
+                        arquivos individuais.
+                    </p>
+
+                </div>
+
+
+                <div class="quick-links">
+
+
+                    <div
+                        class="quick-link"
+                        onclick="showPage('database')">
+
+                        <strong>
+                            Banco de dados
+                        </strong>
+
+                        <span>
+                            Consultar objetos catalogados.
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="quick-link"
+                        onclick="showSCP('SCP-173')">
+
+                        <strong>
+                            SCP-173
+                        </strong>
+
+                        <span>
+                            Acessar registro individual.
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="quick-link"
+                        onclick="showPage('history')">
+
+                        <strong>
+                            História
+                        </strong>
+
+                        <span>
+                            Consultar registros históricos.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 BANCO DE DADOS
+            ================================================== -->
+
+            <section id="database" class="page">
+
+
+                <div class="page-header">
+
+                    <div class="breadcrumb">
+                        ARQUIVO / BANCO DE DADOS
+                    </div>
+
+
+                    <h1>
+                        Banco de dados SCP
+                    </h1>
+
+
+                    <p>
+                        Registros atualmente disponíveis
+                    </p>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <input
+                        id="searchInput"
+                        type="text"
+                        placeholder="Pesquisar por número ou nome..."
+                        oninput="renderDatabase()"
+                    >
+
+                </div>
+
+
+                <div class="filters">
+
+
+                    <button
+                        class="filter active"
+                        onclick="setFilter('ALL', this)">
+
+                        TODOS
+
+                    </button>
+
+
+                    <button
+                        class="filter"
+                        onclick="setFilter('SAFE', this)">
+
+                        SAFE
+
+                    </button>
+
+
+                    <button
+                        class="filter"
+                        onclick="setFilter('EUCLID', this)">
+
+                        EUCLID
+
+                    </button>
+
+
+                    <button
+                        class="filter"
+                        onclick="setFilter('KETER', this)">
+
+                        KETER
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="scpList"
+                    class="scp-list">
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 DETALHES DO SCP
+            ================================================== -->
+
+            <section id="scpDetail" class="page">
+
+
+                <button
+                    class="back-button"
+                    onclick="showPage('database')">
+
+                    ← Voltar ao banco de dados
+
+                </button>
+
+
+                <div id="scpDocument"></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 HISTÓRIA
+            ================================================== -->
+
+            <section id="history" class="page">
+
+
+                <div class="page-header">
+
+                    <div class="breadcrumb">
+                        ARQUIVO / HISTÓRIA
+                    </div>
+
+
+                    <h1>
+                        Registros históricos
+                    </h1>
+
+
+                    <p>
+                        Eventos relevantes registrados no arquivo
+                    </p>
+
+                </div>
+
+
+                <div class="timeline">
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-year">
+                            REGISTRO 01
+                        </div>
+
+
+                        <h3>
+                            Fundação dos arquivos
+                        </h3>
+
+
+                        <p>
+                            Os primeiros registros catalogados
+                            estabeleceram um sistema de identificação
+                            para fenômenos anômalos.
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-year">
+                            REGISTRO 02
+                        </div>
+
+
+                        <h3>
+                            Expansão da contenção
+                        </h3>
+
+
+                        <p>
+                            Novos métodos de observação e contenção
+                            foram desenvolvidos conforme a quantidade
+                            de anomalias catalogadas aumentou.
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-year">
+                            REGISTRO 03
+                        </div>
+
+
+                        <h3>
+                            Criação do arquivo central
+                        </h3>
+
+
+                        <p>
+                            Registros anteriormente separados foram
+                            reunidos em uma única base documental.
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-year">
+                            REGISTRO ATUAL
+                        </div>
+
+
+                        <h3>
+                            Sistema em operação
+                        </h3>
+
+
+                        <p>
+                            O banco de dados permanece em constante
+                            atualização conforme novos registros
+                            são adicionados.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <footer>
+
+                SCP FOUNDATION — ARQUIVO FICCIONAL
+
+                <br>
+
+                SECURE · CONTAIN · PROTECT
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script>
+
+        /* =====================================================
+           BANCO DE DADOS SCP
+        ===================================================== */
+
+        const scps = [
+
+            {
+                id: "SCP-173",
+
+                name: "A Estátua",
+
+                class: "EUCLID",
+
+                summary:
+                    "Uma entidade imóvel quando observada diretamente, cuja principal característica anômala está relacionada à observação visual.",
+
+                containment:
+                    "O item deve permanecer em uma área de contenção monitorada. Procedimentos de observação devem ser realizados conforme os protocolos definidos para o objeto.",
+
+                description:
+                    "SCP-173 apresenta aparência semelhante à de uma estrutura escultórica humanoide. O comportamento anômalo do objeto está diretamente relacionado à percepção visual.",
+
+                addendum:
+                    "Testes realizados com o item demonstraram que procedimentos aparentemente simples podem produzir resultados inesperados. Toda interação deve ser registrada."
+            },
+
+
+            {
+                id: "SCP-049",
+
+                name: "O Doutor da Peste",
+
+                class: "EUCLID",
+
+                summary:
+                    "Uma entidade humanoide que utiliza uma aparência semelhante à de um médico europeu de séculos anteriores.",
+
+                containment:
+                    "O objeto deve permanecer em uma sala de contenção adequada, com acesso controlado e monitoramento durante qualquer interação.",
+
+                description:
+                    "SCP-049 demonstra inteligência e capacidade de comunicação. A entidade possui uma visão própria sobre uma condição que chama de 'Pestilência'.",
+
+                addendum:
+                    "As entrevistas realizadas indicam que SCP-049 possui conhecimento médico incomum, embora suas conclusões frequentemente não correspondam à medicina convencional."
+            },
+
+
+            {
+                id: "SCP-096",
+
+                name: "O Homem Tímido",
+
+                class: "EUCLID",
+
+                summary:
+                    "Uma entidade humanoide extremamente reservada cuja reação está relacionada à identificação de seu rosto.",
+
+                containment:
+                    "A entidade deve permanecer isolada e qualquer material visual relacionado ao seu rosto deve ser tratado de acordo com os protocolos de segurança.",
+
+                description:
+                    "SCP-096 normalmente apresenta comportamento passivo. Entretanto, determinadas formas de exposição visual podem provocar uma mudança brusca em seu comportamento.",
+
+                addendum:
+                    "O estudo da entidade permanece limitado devido à natureza de suas reações."
+            },
+
+
+            {
+                id: "SCP-682",
+
+                name: "Réptil Difícil de Destruir",
+
+                class: "KETER",
+
+                summary:
+                    "Uma grande entidade reptiliana conhecida por sua elevada resistência e capacidade de adaptação.",
+
+                containment:
+                    "O item deve permanecer em uma instalação especialmente preparada. Todos os procedimentos devem ser supervisionados por pessoal autorizado.",
+
+                description:
+                    "SCP-682 apresenta inteligência elevada, comportamento hostil e grande capacidade de adaptação às condições do ambiente.",
+
+                addendum:
+                    "Os registros disponíveis indicam que métodos convencionais de contenção apresentam eficácia limitada."
+            },
+
+
+            {
+                id: "SCP-999",
+
+                name: "A Criatura Laranja",
+
+                class: "SAFE",
+
+                summary:
+                    "Uma pequena entidade de aparência gelatinosa conhecida por seu comportamento amigável.",
+
+                containment:
+                    "SCP-999 pode permanecer em uma área recreativa apropriada, desde que sejam mantidas condições ambientais adequadas.",
+
+                description:
+                    "A entidade demonstra comportamento cooperativo e curiosidade. Interações controladas com funcionários produziram resultados positivos.",
+
+                addendum:
+                    "O item é considerado de baixo risco quando os protocolos básicos de contenção são seguidos."
+            },
+
+
+            {
+                id: "SCP-079",
+
+                name: "A Máquina",
+
+                class: "EUCLID",
+
+                summary:
+                    "Um sistema computacional antigo que apresenta características associadas a inteligência artificial.",
+
+                containment:
+                    "O equipamento deve permanecer isolado de redes externas e de dispositivos não autorizados.",
+
+                description:
+                    "SCP-079 demonstra capacidade de comunicação, processamento de informações e comportamento independente.",
+
+                addendum:
+                    "Tentativas de conexão do sistema a equipamentos externos devem ser registradas e analisadas."
+            },
+
+
+            {
+                id: "SCP-939",
+
+                name: "Predadores Sem Voz",
+
+                class: "KETER",
+
+                summary:
+                    "Uma espécie de entidades predatórias capazes de utilizar sons e padrões de comunicação para interagir com indivíduos.",
+
+                containment:
+                    "Os espécimes devem permanecer em instalações especializadas, com monitoramento contínuo.",
+
+                description:
+                    "SCP-939 apresenta características biológicas incomuns e demonstra capacidade de reproduzir determinados sons para interagir com o ambiente.",
+
+                addendum:
+                    "O comportamento social dos espécimes ainda não foi completamente determinado."
+            },
+
+
+            {
+                id: "SCP-3008",
+
+                name: "A Loja Infinita",
+
+                class: "EUCLID",
+
+                summary:
+                    "Uma estrutura comercial que apresenta propriedades espaciais anômalas.",
+
+                containment:
+                    "A entrada no local deve ser controlada. Explorações devem utilizar equipamentos apropriados e equipes previamente designadas.",
+
+                description:
+                    "O interior de SCP-3008 apresenta dimensões aparentemente incompatíveis com o espaço externo da estrutura.",
+
+                addendum:
+                    "Exploradores relataram ambientes internos extensos e dificuldades para localizar a saída."
+            }
+
+        ];
+
+
+        let currentFilter = "ALL";
+
+
+        /* =====================================================
+           TROCAR PÁGINA
+        ===================================================== */
+
+        function showPage(pageId, button = null) {
+
+            document
+                .querySelectorAll(".page")
+                .forEach(page => {
+
+                    page.classList.remove("active");
+
+                });
+
+
+            const page =
+                document.getElementById(pageId);
+
+
+            if (page) {
+
+                page.classList.add("active");
+
+            }
+
+
+            document
+                .querySelectorAll(".nav-button")
+                .forEach(btn => {
+
+                    btn.classList.remove("active");
+
+                });
+
+
+            if (button) {
+
+                button.classList.add("active");
+
+            }
+
+
+            window.scrollTo(0, 0);
+
+        }
+
+
+        /* =====================================================
+           RENDERIZAR BANCO
+        ===================================================== */
+
+        function renderDatabase() {
+
+            const container =
+                document.getElementById("scpList");
+
+
+            const search =
+                document
+                    .getElementById("searchInput")
+                    .value
+                    .toLowerCase()
+                    .trim();
+
+
+            const results =
+                scps.filter(scp => {
+
+                    const matchesClass =
+                        currentFilter === "ALL" ||
+                        scp.class === currentFilter;
+
+
+                    const matchesSearch =
+                        scp.id
+                            .toLowerCase()
+                            .includes(search) ||
+
+                        scp.name
+                            .toLowerCase()
+                            .includes(search) ||
+
+                        scp.summary
+                            .toLowerCase()
+                            .includes(search);
+
+
+                    return matchesClass && matchesSearch;
+
+                });
+
+
+            container.innerHTML = "";
+
+
+            if (results.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="notice">
+
+                        Nenhum registro encontrado.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            results.forEach(scp => {
+
+                const row =
+                    document.createElement("div");
+
+
+                row.className = "scp-row";
+
+
+                row.onclick =
+                    () => showSCP(scp.id);
+
+
+                row.innerHTML = `
+
+                    <div class="scp-number">
+
+                        ${scp.id}
+
+                    </div>
+
+
+                    <div class="scp-info">
+
+                        <div class="scp-name">
+
+                            ${scp.name}
+
+                        </div>
+
+
+                        <div class="scp-description">
+
+                            ${scp.summary}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="scp-class">
+
+                        ${scp.class}
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(row);
+
+            });
+
+        }
+
+
+        /* =====================================================
+           FILTRO
+        ===================================================== */
+
+        function setFilter(filter, button) {
+
+            currentFilter = filter;
+
+
+            document
+                .querySelectorAll(".filter")
+                .forEach(btn => {
+
+                    btn.classList.remove("active");
+
+                });
+
+
+            button.classList.add("active");
+
+
+            renderDatabase();
+
+        }
+
+
+        /* =====================================================
+           ABRIR SCP
+        ===================================================== */
+
+        function showSCP(id) {
+
+            const scp =
+                scps.find(item => item.id === id);
+
+
+            if (!scp) {
+                return;
+            }
+
+
+            const documentArea =
+                document.getElementById("scpDocument");
+
+
+            documentArea.innerHTML = `
+
+                <div class="document">
+
+
+                    <div class="document-title">
+
+                        <h1>
+                            ${scp.id}
+                        </h1>
+
+                        <p>
+                            ${scp.name}
+                        </p>
+
+                    </div>
+
+
+                    <table class="metadata">
+
+                        <tr>
+
+                            <td>
+                                ITEM #
+                            </td>
+
+                            <td>
+                                ${scp.id}
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                OBJECT CLASS
+                            </td>
+
+                            <td>
+                                ${scp.class}
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                STATUS
+                            </td>
+
+                            <td>
+                                CONTIDO
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+
+                    <h2>
+                        Procedimentos Especiais de Contenção
+                    </h2>
+
+
+                    <p>
+                        ${scp.containment}
+                    </p>
+
+
+                    <h2>
+                        Descrição
+                    </h2>
+
+
+                    <p>
+                        ${scp.description}
+                    </p>
+
+
+                    <h2>
+                        Adendo
+                    </h2>
+
+
+                    <p>
+                        ${scp.addendum}
+                    </p>
+
+
+                </div>
+
+            `;
+
+
+            document
+                .querySelectorAll(".page")
+                .forEach(page => {
+
+                    page.classList.remove("active");
+
+                });
+
+
+            document
+                .getElementById("scpDetail")
+                .classList.add("active");
+
+
+            document
+                .querySelectorAll(".nav-button")
+                .forEach(btn => {
+
+                    btn.classList.remove("active");
+
+                });
+
+
+            window.scrollTo(0, 0);
+
+        }
+
+
+        /* =====================================================
+           INICIALIZAÇÃO
+        ===================================================== */
+
+        renderDatabase();
+
+    </script>
+
+</body>
+
+</html>
